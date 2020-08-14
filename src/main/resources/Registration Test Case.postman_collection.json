@@ -1,0 +1,719 @@
+{
+	"info": {
+		"_postman_id": "e381c1a2-7f68-42f9-a029-67aea1bbfc1d",
+		"name": "Registration Test Case",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add User",
+			"item": [
+				{
+					"name": "Validate Null",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b6a4c8f5-5a95-46f6-af43-e9e938639634",
+								"exec": [
+									"let bodyData = JSON.parse(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"First Name validate null\", function () {\r",
+									"    pm.expect(bodyData.firstName).to.eql(\"first name is needed\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Last Name validate null\", function () {\r",
+									"    pm.expect(bodyData.lastName).to.eql(\"last name is needed\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Phone Number validate null\", function () {\r",
+									"    pm.expect(bodyData.phoneNumber).to.eql(\"phone number is needed\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Email validate null\", function () {\r",
+									"    pm.expect(bodyData.email).to.eql(\"email is needed\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": null,\r\n    \"lastName\": null,\r\n    \"phoneNumber\": null,\r\n    \"email\": null,\r\n    \"birthDate\": \"1989-09-14\",\r\n    \"gender\": \"M\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mitrais/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mitrais",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate Empty",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "028f6c64-1589-4d9f-8f61-ce39922b9015",
+								"exec": [
+									"let bodyData = JSON.parse(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"First Name validate empty\", function () {\r",
+									"    pm.expect(bodyData.firstName).to.eql(\"first name is needed\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Last Name validate empty\", function () {\r",
+									"    pm.expect(bodyData.lastName).to.eql(\"last name is needed\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Phone Number validate empty\", function () {\r",
+									"    pm.expect(bodyData.phoneNumber).to.eql(\"phone number is needed\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Email validate empty\", function () {\r",
+									"    pm.expect(bodyData.email).to.eql(\"email is needed\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"\",\r\n    \"lastName\": \"\",\r\n    \"phoneNumber\": \"\",\r\n    \"email\": \"\",\r\n    \"birthDate\": \"1989-09-14\",\r\n    \"gender\": \"M\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mitrais/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mitrais",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Phone number is not number",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7e7c6391-a703-4ff3-986e-1d2ffba30507",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate phone number\", function () {\r",
+									"    pm.expect(responseBody).to.eql(\"Please enter valid Indonesian phone number\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"mitra\",\r\n    \"lastName\": \"is\",\r\n    \"phoneNumber\": \"abcd\",\r\n    \"email\": \"mitrais@mitrais.com\",\r\n    \"birthDate\": \"1989-09-14\",\r\n    \"gender\": \"M\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mitrais/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mitrais",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Wrong Phone number format",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "559205b9-c51f-423b-a3c0-4a987be05b18",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate phone number\", function () {\r",
+									"    pm.expect(responseBody).to.eql(\"Please enter valid Indonesian phone number\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"mitra\",\r\n    \"lastName\": \"is\",\r\n    \"phoneNumber\": \"998565656\",\r\n    \"email\": \"mitrais@mitrais.com\",\r\n    \"birthDate\": \"1989-09-14\",\r\n    \"gender\": \"M\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mitrais/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mitrais",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add User Success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7e12f803-ddb1-4e94-bda7-0dc18c5e0abb",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"let bodyData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"userId\", bodyData.id);    "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"mitra\",\r\n    \"lastName\": \"is\",\r\n    \"phoneNumber\": \"085690039089\",\r\n    \"email\": \"mitrais@mitrais.com\",\r\n    \"birthDate\": \"1989-09-14\",\r\n    \"gender\": \"M\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mitrais/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mitrais",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Phone already registered",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1e4a147a-48f9-468d-9a17-f75d02f5a537",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate phone number\", function () {\r",
+									"    pm.expect(responseBody).to.eql(\"Email or Phone Number Already Registered\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"mitra\",\r\n    \"lastName\": \"is\",\r\n    \"phoneNumber\": \"085690039089\",\r\n    \"email\": \"mitrais2@mitrais.com\",\r\n    \"birthDate\": \"1989-09-14\",\r\n    \"gender\": \"M\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mitrais/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mitrais",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Email already registered",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a133d7c3-706c-48ba-ac5c-6293080263ab",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate Email\", function () {\r",
+									"    pm.expect(responseBody).to.eql(\"Email or Phone Number Already Registered\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"mitra\",\r\n    \"lastName\": \"is\",\r\n    \"phoneNumber\": \"085690000000\",\r\n    \"email\": \"mitrais@mitrais.com\",\r\n    \"birthDate\": \"1989-09-14\",\r\n    \"gender\": \"M\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mitrais/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mitrais",
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Update User",
+			"item": [
+				{
+					"name": "Update User Not Found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0b3225c8-30d2-4898-9f95-0a1b819c8f16",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Jody\",\r\n    \"lastName\": \"Riztana\",\r\n    \"phoneNumber\": \"+62185691136141\",\r\n    \"email\": \"riztana@gmail.com\",\r\n    \"birthDate\": \"1989-09-14\",\r\n    \"gender\": \"M\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mitrais/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mitrais",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "569d59eb-a135-49d7-8f28-ba41d8680d51",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"let bodyData = JSON.parse(responseBody);\r",
+									"pm.test(\"Data is updated\", function () {\r",
+									"    pm.expect(responseBody).to.not.null;\r",
+									"    pm.expect(bodyData.id).to.eql(pm.collectionVariables.get(\"userId\"));\r",
+									"    pm.expect(bodyData.firstName).to.eql(\"Jody\");\r",
+									"    pm.expect(bodyData.lastName).to.eql(\"Riztana\");\r",
+									"    pm.expect(bodyData.birthDate).to.eql(\"1989-09-03T00:00:00.000+00:00\");\r",
+									"    pm.expect(bodyData.gender).to.eql(\"M\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Jody\",\r\n    \"lastName\": \"Riztana\",\r\n    \"phoneNumber\": \"085690039089\",\r\n    \"email\": \"mitrais@mitrais.com\",\r\n    \"birthDate\": \"1989-09-03\",\r\n    \"gender\": \"M\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mitrais/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mitrais",
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Get User",
+			"item": [
+				{
+					"name": "Get User Detail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "32eb07fd-299e-4071-9048-2b149ce83d3b",
+								"exec": [
+									"let bodyData = JSON.parse(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Data is not null\", function () {\r",
+									"    pm.expect(responseBody).to.not.null;\r",
+									"    pm.expect(bodyData.id).to.eql(pm.collectionVariables.get(\"userId\"));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/mitrais/user/{{userId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mitrais",
+								"user",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a006001a-d2c5-4a7f-8df5-2578ca9fd67b",
+								"exec": [
+									"let bodyData = JSON.parse(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Data is not null\", function () {\r",
+									"    pm.expect(bodyData.content.length).to.be.above(0);\r",
+									"    pm.expect(bodyData.totalElements).to.be.above(0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/mitrais/user?pageIndex=0&pageSize=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mitrais",
+								"user"
+							],
+							"query": [
+								{
+									"key": "pageIndex",
+									"value": "0"
+								},
+								{
+									"key": "pageSize",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Delete User",
+			"item": [
+				{
+					"name": "Delete User Not Found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "64faad57-824e-47e7-8d27-7a1fffca52fa",
+								"exec": [
+									"pm.test(\"User not found\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"    pm.expect(responseBody).to.eql(\"User not found\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Jody\",\r\n    \"lastName\": \"Riztana\",\r\n    \"phoneNumber\": \"+62185691136141\",\r\n    \"email\": \"riztana@gmail.com\",\r\n    \"birthDate\": \"1989-09-14\",\r\n    \"gender\": \"M\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mitrais/user/-1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mitrais",
+								"user",
+								"-1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User Success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "22c097ee-adbf-42ab-a734-ff1c4df57fe1",
+								"exec": [
+									"pm.test(\"Delete Success\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Jody\",\r\n    \"lastName\": \"Riztana\",\r\n    \"phoneNumber\": \"+62185691136141\",\r\n    \"email\": \"riztana@gmail.com\",\r\n    \"birthDate\": \"1989-09-14\",\r\n    \"gender\": \"M\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mitrais/user/{{userId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mitrais",
+								"user",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Deleted",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "19153f09-6f86-4d17-a5ec-28f67095ef1d",
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Data is gone\", function () {\r",
+									"    pm.expect(responseBody).to.eql(\"User not found\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/mitrais/user/{{userId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mitrais",
+								"user",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"variable": [
+		{
+			"id": "de3d60e1-835c-440e-b3ed-5f1943ee3d95",
+			"key": "userId",
+			"value": ""
+		}
+	],
+	"protocolProfileBehavior": {}
+}
