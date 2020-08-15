@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="jody" id="user-1">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="user"/>
+            </not>
+        </preConditions>
+        <createTable tableName="user">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="user_pk"/>
+            </column>
+            <column name="first_name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone_number" type="VARCHAR(20)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="email" type="VARCHAR(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="birth_date" type="DATE(6)" />
+            <column name="gender" type="CHAR(1)" />
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
